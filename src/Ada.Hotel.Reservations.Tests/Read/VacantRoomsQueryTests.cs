@@ -7,7 +7,7 @@ using NUnit.Framework;
 namespace Ada.Hotel.Reservations.Tests.Read
 {
     [TestFixture]
-    public class AvailableRoomsQueryTests
+    public class VacantRoomsQueryTests
     {
         private VacantRoomsDenormalizer _sut;
         private ReservationsRepository _reservationsRepository;
@@ -66,6 +66,37 @@ namespace Ada.Hotel.Reservations.Tests.Read
             Assert.That(availableRoomType.Description, Is.EqualTo("Double Room"));
             Assert.That(availableRoomType.TotalNoOfUnits, Is.EqualTo(noOfUnits));
             Assert.That(availableRoomType.NoOfUnitsAvailable, Is.EqualTo(1));
+        }
+
+        [Test]
+        public void Given_2_roomtypes_vacancies_are_returned_just_for_one_of_them()
+        {
+            //Given
+            var doubleRoomTypeId = Guid.NewGuid();
+            var singleRoomTypeId = Guid.NewGuid();
+            var hotelId = Guid.NewGuid();
+
+            _sut.Handle(new RoomsCreated(doubleRoomTypeId, "Double Room", 1, hotelId));
+            _sut.Handle(new RoomsCreated(singleRoomTypeId, "Single Room", 2, hotelId));
+            var reservationId = Guid.NewGuid();
+            _sut.Handle(new RoomsReserved(reservationId, new DateTime(2016, 03, 30), new DateTime(2016, 04, 03), doubleRoomTypeId, "guest 1", 1));
+            //When
+            var checkInDate = new DateTime(2016, 04, 2);
+            var checkOutDate = new DateTime(2016, 04, 03);
+            var availableRooms = _reservationsRepository.FindVacanciesFor(checkInDate, checkOutDate).ToArray();
+            Assert.That(availableRooms, Has.Length.EqualTo(2));
+
+            var doubleRoomsAvailable = availableRooms[0];
+            Assert.That(doubleRoomsAvailable.RoomTypeId, Is.EqualTo(doubleRoomTypeId));
+            Assert.That(doubleRoomsAvailable.Description, Is.EqualTo("Double Room"));
+            Assert.That(doubleRoomsAvailable.TotalNoOfUnits, Is.EqualTo(1));
+            Assert.That(doubleRoomsAvailable.NoOfUnitsAvailable, Is.EqualTo(0));
+
+            var singleRoomsAvailable = availableRooms[1];
+            Assert.That(singleRoomsAvailable.RoomTypeId, Is.EqualTo(singleRoomTypeId));
+            Assert.That(singleRoomsAvailable.Description, Is.EqualTo("Single Room"));
+            Assert.That(singleRoomsAvailable.TotalNoOfUnits, Is.EqualTo(2));
+            Assert.That(singleRoomsAvailable.NoOfUnitsAvailable, Is.EqualTo(2));
         }
     }
 }

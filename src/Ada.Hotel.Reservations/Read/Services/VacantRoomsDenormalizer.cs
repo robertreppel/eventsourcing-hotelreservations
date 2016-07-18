@@ -23,6 +23,7 @@ namespace Ada.Hotel.Reservations.Read.Services
         {
             var reservation = new Reservation
             {
+                Id = @event.ReservationId,
                 RoomTypeId = @event.RoomTypeId,
                 GuestId = @event.GuestId,
                 NoOfUnits = @event.NoOfUnits,

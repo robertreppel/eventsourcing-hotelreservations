@@ -9,15 +9,15 @@ namespace Ada.Hotel.Reservations.Read.Services
     {
         public IEnumerable<VacantRooms> FindVacanciesFor(DateTime checkinDate, DateTime checkoutDate)
         {
-            var conflictingReservations = _reservations.FindAll(existingReservation =>
-                (existingReservation.CheckInDate >= checkinDate && existingReservation.CheckoutDate <= checkoutDate) ||
-                (existingReservation.CheckInDate >= checkinDate && existingReservation.CheckInDate < checkoutDate) ||
-                (existingReservation.CheckInDate <= checkinDate && checkinDate < existingReservation.CheckoutDate)
-                ).ToList();
-
             var result = new List<VacantRooms>();
             foreach (var rooms in _roomTypes)
             {
+                var conflictingReservations = _reservations.FindAll(existingReservation =>
+                    ((existingReservation.CheckInDate >= checkinDate && existingReservation.CheckoutDate <= checkoutDate) ||
+                    (existingReservation.CheckInDate >= checkinDate && existingReservation.CheckInDate < checkoutDate) ||
+                    (existingReservation.CheckInDate <= checkinDate && checkinDate < existingReservation.CheckoutDate)) &&
+                    existingReservation.RoomTypeId == rooms.Id
+                    ).ToList();
                 var roomTypeInfo = _roomTypes.FindLast(roomType => roomType.Id == rooms.Id);
                 result.Add(new VacantRooms
                 {

@@ -1,0 +1,189 @@
+{
+	"id": "136d7ef8-d2f2-53be-ed78-e93a99f5546b",
+	"name": "Ada.Demo.Hotel",
+	"description": "",
+	"order": [
+		"98d1507a-b089-2038-bb08-942ed2eeb4b9",
+		"f36d3113-8c7d-182c-5081-01ed9bed430c",
+		"4c43df9b-3a62-6c17-4980-bd9d1e422f39",
+		"0c237d26-4c88-d002-59a8-518cf1fab198"
+	],
+	"folders": [],
+	"timestamp": 1468374597274,
+	"owner": 0,
+	"remoteLink": "",
+	"public": false,
+	"published": false,
+	"requests": [
+		{
+			"id": "0c237d26-4c88-d002-59a8-518cf1fab198",
+			"headers": "",
+			"url": "http://127.0.0.1:9000/rooms/reservations",
+			"preRequestScript": null,
+			"pathVariables": {},
+			"method": "POST",
+			"data": [
+				{
+					"key": "checkindate",
+					"value": "6/20/2016",
+					"type": "text",
+					"enabled": true
+				},
+				{
+					"key": "checkoutdate",
+					"value": "6/21/2016",
+					"type": "text",
+					"enabled": true
+				},
+				{
+					"key": "roomtypeid",
+					"value": "94611db0-56f8-4a12-bd5b-f31ff0a26812",
+					"type": "text",
+					"enabled": true
+				},
+				{
+					"key": "guestid",
+					"value": "guestid-1",
+					"type": "text",
+					"enabled": true
+				},
+				{
+					"key": "id",
+					"value": "{890934F1-EDB8-4590-8432-0EEA8CB9EF84}",
+					"type": "text",
+					"enabled": true
+				},
+				{
+					"key": "noofunits",
+					"value": "1",
+					"type": "text",
+					"enabled": true
+				}
+			],
+			"dataMode": "params",
+			"version": 2,
+			"tests": null,
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1468861065243,
+			"name": "Make reservation (POST)",
+			"description": "Make a reservation.",
+			"collectionId": "136d7ef8-d2f2-53be-ed78-e93a99f5546b",
+			"responses": []
+		},
+		{
+			"id": "4c43df9b-3a62-6c17-4980-bd9d1e422f39",
+			"headers": "",
+			"url": "http://127.0.0.1:9000/rooms/vacancies?checkin=2016/6/20&checkout=2016/6/21",
+			"preRequestScript": null,
+			"pathVariables": {},
+			"method": "GET",
+			"data": [
+				{
+					"key": "Firstname",
+					"value": "Nancy",
+					"type": "text",
+					"enabled": true
+				},
+				{
+					"key": "Lastname",
+					"value": "Miller",
+					"type": "text",
+					"enabled": true
+				},
+				{
+					"key": "Phone",
+					"value": "111-111-1111",
+					"type": "text",
+					"enabled": true
+				}
+			],
+			"dataMode": "params",
+			"version": 2,
+			"tests": null,
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1468861046731,
+			"name": "Vacancies query  (GET)",
+			"description": "",
+			"collectionId": "136d7ef8-d2f2-53be-ed78-e93a99f5546b",
+			"responses": []
+		},
+		{
+			"id": "98d1507a-b089-2038-bb08-942ed2eeb4b9",
+			"headers": "",
+			"url": "http://127.0.0.1:9000/rooms/types",
+			"preRequestScript": null,
+			"pathVariables": {},
+			"method": "POST",
+			"data": [
+				{
+					"key": "name",
+					"value": "Double",
+					"type": "text",
+					"enabled": true
+				},
+				{
+					"key": "NoOfUnits",
+					"value": "3",
+					"type": "text",
+					"enabled": true
+				},
+				{
+					"key": "id",
+					"value": "94611db0-56f8-4a12-bd5b-f31ff0a26812",
+					"type": "text",
+					"enabled": true
+				}
+			],
+			"dataMode": "params",
+			"version": 2,
+			"tests": null,
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1468861058460,
+			"name": "Create room type (POST)",
+			"description": "Single rooms, double rooms, etc.\nWith total number of units for them.",
+			"collectionId": "136d7ef8-d2f2-53be-ed78-e93a99f5546b",
+			"responses": []
+		},
+		{
+			"id": "f36d3113-8c7d-182c-5081-01ed9bed430c",
+			"headers": "",
+			"url": "http://127.0.0.1:9000/rooms/types",
+			"preRequestScript": null,
+			"pathVariables": {},
+			"method": "GET",
+			"data": [
+				{
+					"key": "Firstname",
+					"value": "Nancy",
+					"type": "text",
+					"enabled": true
+				},
+				{
+					"key": "Lastname",
+					"value": "Miller",
+					"type": "text",
+					"enabled": true
+				},
+				{
+					"key": "Phone",
+					"value": "111-111-1111",
+					"type": "text",
+					"enabled": true
+				}
+			],
+			"dataMode": "params",
+			"version": 2,
+			"tests": null,
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1468765659887,
+			"name": "Room Types (GET)",
+			"description": "Categories of rooms.",
+			"collectionId": "136d7ef8-d2f2-53be-ed78-e93a99f5546b",
+			"responses": []
+		}
+	]
+}

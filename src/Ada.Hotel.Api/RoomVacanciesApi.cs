@@ -1,8 +1,6 @@
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using Ada.Hotel.Reservations;
-using Ada.Hotel.Reservations.Read.Models;
 using Nancy;
 
 namespace Ada.Hotel.Api
@@ -11,14 +9,14 @@ namespace Ada.Hotel.Api
     {
         public RoomVacanciesApi()
         {
-            Get("/rooms/vacancies",  dates => GetAvailableRoomsFor(dates));
+            Get("/rooms/vacancies",  _ => GetAvailableRoomsFor());
         }
 
-        private Response GetAvailableRoomsFor(dynamic dates)
+        private Response GetAvailableRoomsFor()
         {
             DateTime checkin = DateTime.Parse(Request.Query["checkin"]);
             DateTime checkout = DateTime.Parse(Request.Query["checkin"]);
-            List<VacantRooms> result = Repository.Reservations.FindVacanciesFor(checkin, checkout).ToList();
+            var result = Repository.Reservations.FindVacanciesFor(checkin, checkout).ToList();
             var response = Response.AsJson(result);
             response.ContentType = "application/json";
             response.StatusCode = HttpStatusCode.OK;

@@ -44,7 +44,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Read\AvailableRoomsQueryTests.cs" />
+    <Compile Include="Read\VacantRoomsQueryTests.cs" />
     <Compile Include="Read\RoomTypesQueryTests.cs" />
     <Compile Include="CreateRoomsTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
