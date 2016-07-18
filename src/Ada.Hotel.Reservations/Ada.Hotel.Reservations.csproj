@@ -42,14 +42,17 @@
   <ItemGroup>
     <Compile Include="Bootstrap.cs" />
     <Compile Include="Commands\CreateRooms.cs" />
-    <Compile Include="Commands\ReserveRoom.cs" />
+    <Compile Include="Commands\ReserveRooms.cs" />
     <Compile Include="Events\RoomsReserved.cs" />
+    <Compile Include="Read\Models\Reservation.cs" />
+    <Compile Include="Read\Services\VacantRoomsDenormalizer.cs" />
+    <Compile Include="Read\Services\ReservationsRepository.cs" />
     <Compile Include="Repository.cs" />
     <Compile Include="Read\Models\RoomType.cs" />
-    <Compile Include="Read\Models\AvailableRoomType.cs" />
+    <Compile Include="Read\Models\VacantRooms.cs" />
     <Compile Include="Read\Services\RoomTypeRepository.cs" />
     <Compile Include="Read\Services\RoomTypesDenormalizer.cs" />
-    <Compile Include="Rooms.cs" />
+    <Compile Include="RoomTypes.cs" />
     <Compile Include="RoomsDomain.cs" />
     <Compile Include="Events\RoomsCreated.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

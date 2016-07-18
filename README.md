@@ -2,7 +2,14 @@
 
 Sample implementation of an aggregate and read model from the "Online Reservations" bounded context we identified in http://www.meetup.com/DDD-CQRS-ES/events/232482868/ .
 
-## REST API:
+## TODO
+
+- Fail if a 2nd reservation with the same reservationid is made.
+- Room vacancy readmodel: Reproduce/fix bug for hotels with multiple room types - available noOfUnits are 0 if there are previous reservations of another type.
+- Improve exception handling.
+- README: Curls for vacancy queries and reservations.
+
+## API:
 
 ### Create a room type (Double, Single, ...) and the number of units available:
 ```

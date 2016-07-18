@@ -2,10 +2,10 @@
 
 namespace Ada.Hotel.Reservations.Read.Models
 {
-    public class AvailableRoomType
+    public class VacantRooms
     {
-        public Guid Id { get; set; }
-        public string Name { get; set; }
+        public Guid RoomTypeId { get; set; }
+        public string Description { get; set; }
         public int NoOfUnitsAvailable { get; set; }
         public int TotalNoOfUnits { get; set; }
     }

@@ -12,7 +12,7 @@ namespace Ada.Hotel.Reservations.Tests
         public void WhenCreate_ThenRoomsCreated()
         {
             //Given
-            var rooms = new Rooms();
+            var rooms = new RoomTypes();
             //When
             var roomCategoryId = Guid.NewGuid();
             var hotelId = Guid.NewGuid();
@@ -32,11 +32,11 @@ namespace Ada.Hotel.Reservations.Tests
         public void GivenRoomCreated_WhenAlreadyExists_ThenInvalidOperationException()
         {
             //Given
-            var rooms = new Rooms();
-            rooms.Hydrate(new RoomsCreated(Guid.NewGuid(), "Id", 1, Guid.NewGuid()));
+            var rooms = new RoomTypes();
+            rooms.Hydrate(new RoomsCreated(Guid.NewGuid(), "RoomTypeId", 1, Guid.NewGuid()));
             //When
             object[] events = null;
-            TestDelegate when = () => events = rooms.Create(Guid.NewGuid(), Guid.NewGuid(), "Id", 1).ToArray();
+            TestDelegate when = () => events = rooms.Create(Guid.NewGuid(), Guid.NewGuid(), "RoomTypeId", 1).ToArray();
             //Then
             var ex = Assert.Throws<InvalidOperationException>(when);
             Assert.That(events, Is.Null);
@@ -47,7 +47,7 @@ namespace Ada.Hotel.Reservations.Tests
         public void GivenRoomCreated_WhenRoomTypeBlank_ThenInvalidOperationException()
         {
             //Given
-            var rooms = new Rooms();
+            var rooms = new RoomTypes();
             //When
             object[] events = null;
             TestDelegate when = () => events = rooms.Create(Guid.NewGuid(), Guid.NewGuid(), "", 1).ToArray();
@@ -60,7 +60,7 @@ namespace Ada.Hotel.Reservations.Tests
         public void GivenRoomCreated_WhenLessThanZeroUnits_ThenInvalidOperationException()
         {
             //Given
-            var rooms = new Rooms();
+            var rooms = new RoomTypes();
             //When
             object[] events = null;
             TestDelegate when = () => events = rooms.Create(Guid.NewGuid(), Guid.NewGuid(), "Single", -1).ToArray();

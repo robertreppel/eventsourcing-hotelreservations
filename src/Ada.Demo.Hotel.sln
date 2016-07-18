@@ -12,6 +12,9 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ada.Hotel.Reservations.Tests", "Ada.Hotel.Reservations.Tests\Ada.Hotel.Reservations.Tests.csproj", "{57BC8184-6236-4A23-9948-5A0F455B4499}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{672AE909-E056-4B09-9590-8C1E15F92F8A}"
+	ProjectSection(SolutionItems) = preProject
+		..\README.md = ..\README.md
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

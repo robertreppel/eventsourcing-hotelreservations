@@ -1,25 +1,24 @@
 ﻿using System;
 
-namespace Ada.Hotel.Reservations.Events
+namespace Ada.Hotel.Reservations.Commands
 {
-    public class RoomsReserved
+    public class ReserveRooms
     {
         public readonly Guid ReservationId;
+        public readonly int NoOfUnits;
         public readonly DateTime CheckInDate;
         public readonly DateTime CheckoutDate;
         public readonly Guid RoomTypeId;
         public readonly string GuestId;
-        public readonly int NoOfUnits;
 
-        public RoomsReserved(Guid reservationId, DateTime checkInDate, DateTime checkoutDate, Guid roomTypeIdId, string guestId, int noOfUnits)
+        public ReserveRooms(Guid reservationId, DateTime checkInDate, DateTime checkoutDate, Guid roomTypeId, string guestId, int noOfUnits)
         {
             ReservationId = reservationId;
+            NoOfUnits = noOfUnits;
             GuestId = guestId;
-            RoomTypeId = roomTypeIdId;
+            RoomTypeId = roomTypeId;
             CheckoutDate = checkoutDate;
             CheckInDate = checkInDate;
-            NoOfUnits = noOfUnits;
         }
-
     }
 }

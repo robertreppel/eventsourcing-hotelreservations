@@ -23,20 +23,27 @@ namespace Ada.Hotel.Reservations
             ConsumeInternal(createRooms.HotelId, x => x.Create(createRooms.HotelId, createRooms.RoomTypeId, createRooms.RoomType, createRooms.NoOfUnits));
         }
 
-        private void ConsumeInternal(Guid aggregateId, Func<Rooms, IEnumerable<object>> action)
+        private void ConsumeInternal(Guid aggregateId, Func<RoomTypes, IEnumerable<object>> action)
         {
             using (new Mutex(true, aggregateId.ToString()))
             {
-                var rooms = _aggregateRootRepository.Get<Rooms>(aggregateId);
+                var rooms = _aggregateRootRepository.Get<RoomTypes>(aggregateId);
                 var events = action(rooms).ToList();
                 _aggregateRootRepository.Save(rooms, events);
                 _messageBus.Publish(events);
             }
         }
 
-        internal void Consume(ReserveRoom x)
+        internal void Consume(ReserveRooms reserveRooms)
         {
-            throw new NotImplementedException();
+            using (new Mutex(true, reserveRooms.ReservationId.ToString()))
+            {
+                var rooms = _aggregateRootRepository.Get<RoomTypes>(reserveRooms.RoomTypeId);
+                var events = rooms.Reserve(reserveRooms.ReservationId, reserveRooms.GuestId, reserveRooms.RoomTypeId, reserveRooms.CheckInDate, reserveRooms.CheckoutDate,
+                    reserveRooms.NoOfUnits).ToList();
+                _aggregateRootRepository.Save(rooms, events);
+                _messageBus.Publish(events);
+            }
         }
     }
 }

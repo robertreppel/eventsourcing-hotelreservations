@@ -5,5 +5,6 @@ namespace Ada.Hotel.Reservations
     public class Repository
     {
         public static RoomTypeRepository RoomType { get; set; }
+        public static ReservationsRepository Reservations { get; set; }
     }
 }

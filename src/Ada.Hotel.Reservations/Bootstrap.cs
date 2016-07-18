@@ -20,7 +20,7 @@ namespace Ada.Hotel.Reservations
 
             var roomsDomain = new RoomsDomain(aggregateRootRepository, messageBus);
             dispatcher.RegisterHandler<CreateRooms>(x => roomsDomain.Consume(x));
-            dispatcher.RegisterHandler<ReserveRoom>(x => roomsDomain.Consume(x));
+            dispatcher.RegisterHandler<ReserveRooms>(x => roomsDomain.Consume(x));
         }
 
         private static void WireUpRead(IDispatcher dispatcher)
@@ -28,6 +28,10 @@ namespace Ada.Hotel.Reservations
             Repository.RoomType = new RoomTypeRepository();
             var roomsDenormalizer = new RoomTypesDenormalizer(Repository.RoomType);
             dispatcher.RegisterHandler(roomsDenormalizer);
+
+            Repository.Reservations = new ReservationsRepository();
+            var availableRoomsDenormalizer = new VacantRoomsDenormalizer(Repository.Reservations);
+            dispatcher.RegisterHandler(availableRoomsDenormalizer);
         }
     }
 }

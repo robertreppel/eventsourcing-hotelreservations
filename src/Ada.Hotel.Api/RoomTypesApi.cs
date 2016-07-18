@@ -20,7 +20,6 @@ namespace Ada.Hotel.Api
         private Response CreateNewRoomType()
         {
             var newRoomType = this.Bind<RoomType>();
-            newRoomType.Id = Guid.NewGuid();
             DirectBus.Instance.Send(new CreateRooms(_hotelId, newRoomType.Id, newRoomType.Name, newRoomType.NoOfUnits));
 
             var newResourceUri = $"{Request.Path}/{newRoomType.Id}";

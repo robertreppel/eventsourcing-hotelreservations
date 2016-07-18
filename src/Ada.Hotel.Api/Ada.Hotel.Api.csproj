@@ -118,9 +118,12 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Models\Reservation.cs" />
     <Compile Include="Models\RoomType.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RoomReservationsApi.cs" />
+    <Compile Include="RoomVacanciesApi.cs" />
     <Compile Include="RoomTypesApi.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>

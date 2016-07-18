@@ -9,7 +9,7 @@ using NUnit.Framework;
 namespace Ada.Hotel.Reservations.Tests.Read
 {
     [TestFixture]
-    public class RoomTypesDenormalizerTests
+    public class RoomTypesQueryTests
     {
         private RoomTypesDenormalizer _sut;
         private RoomTypeRepository _availableRoomsRepository;

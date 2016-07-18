@@ -6,14 +6,14 @@ using Cqrs.Domain;
 
 namespace Ada.Hotel.Reservations
 {
-    public class Rooms : AggregateRoot
+    public class RoomTypes : AggregateRoot
     {
         private bool _created;
         private int _totalNumberOfRoomsOfThisType;
         private Guid _roomTypeId;
         private readonly List<RoomsReserved> _roomsReserved;
 
-        public Rooms()
+        public RoomTypes()
         {
             _roomsReserved = new List<RoomsReserved>();
             RegisterHandler<RoomsCreated>(OnRoomsCreated);
@@ -29,7 +29,7 @@ namespace Ada.Hotel.Reservations
             yield return Apply(new RoomsCreated(roomTypeId, typeName, noOfUnits, hotelId));
         }
 
-        public IEnumerable<object> Reserve(string guestId, DateTime newReservationCheckInDate, DateTime newReservationCheckoutDate, int noOfUnits)
+        public IEnumerable<object> Reserve(Guid reservationId, string guestId, Guid roomTypeId, DateTime newReservationCheckInDate, DateTime newReservationCheckoutDate, int noOfUnits)
         {
             if (noOfUnits < 1) throw new InvalidOperationException("Must reserve at least one room.");
             if (newReservationCheckoutDate <= newReservationCheckInDate) throw new InvalidOperationException("Checkin date must be before checkout date.");
@@ -37,18 +37,16 @@ namespace Ada.Hotel.Reservations
             if (noOfUnits > _totalNumberOfRoomsOfThisType) throw new InvalidOperationException("Not enough rooms available.");
 
             var conflictingReservations = _roomsReserved.FindAll(existingReservation =>
-                    (existingReservation.CheckInDate >= newReservationCheckInDate && existingReservation.CheckoutDate <= newReservationCheckoutDate) ||
+                    ((existingReservation.CheckInDate >= newReservationCheckInDate && existingReservation.CheckoutDate <= newReservationCheckoutDate) ||
                     (existingReservation.CheckInDate >= newReservationCheckInDate && existingReservation.CheckInDate < newReservationCheckoutDate) ||
-                    (existingReservation.CheckInDate <= newReservationCheckInDate && newReservationCheckInDate < existingReservation.CheckoutDate)
+                    (existingReservation.CheckInDate <= newReservationCheckInDate && newReservationCheckInDate < existingReservation.CheckoutDate)) &&
+                    existingReservation.RoomTypeId == roomTypeId
                 ).ToList();
 
             var noOfRoomsReserved = CountNoOfRoomsReservedIn(conflictingReservations);
-
-            if (noOfRoomsReserved >= _totalNumberOfRoomsOfThisType) throw new InvalidOperationException("No vacancy.");
-
             if(noOfRoomsReserved >= _totalNumberOfRoomsOfThisType) throw new InvalidOperationException("No vacancy.");
 
-            yield return Apply(new RoomsReserved(newReservationCheckInDate, newReservationCheckoutDate, _roomTypeId, guestId, 1));
+            yield return Apply(new RoomsReserved(reservationId, newReservationCheckInDate, newReservationCheckoutDate, _roomTypeId, guestId, 1));
         }
 
         private static int CountNoOfRoomsReservedIn(List<RoomsReserved> conflictingReservations)
