@@ -15,7 +15,7 @@ namespace Ada.Hotel.Api
         private Response GetAvailableRoomsFor()
         {
             DateTime checkin = DateTime.Parse(Request.Query["checkin"]);
-            DateTime checkout = DateTime.Parse(Request.Query["checkin"]);
+            DateTime checkout = DateTime.Parse(Request.Query["checkout"]);
             var result = Repository.Reservations.FindVacanciesFor(checkin, checkout).ToList();
             var response = Response.AsJson(result);
             response.ContentType = "application/json";

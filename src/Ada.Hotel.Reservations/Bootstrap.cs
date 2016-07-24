@@ -22,7 +22,7 @@ namespace Ada.Hotel.Reservations
             dispatcher.RegisterHandler<CreateRooms>(x => roomsDomain.Consume(x));
             dispatcher.RegisterHandler<ReserveRooms>(x => roomsDomain.Consume(x));
         }
-
+        
         private static void WireUpRead(IDispatcher dispatcher)
         {
             Repository.RoomType = new RoomTypeRepository();
