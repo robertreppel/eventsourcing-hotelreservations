@@ -3,7 +3,7 @@
 Sample implementation of an aggregate and read models from the "Online Booking System" bounded context we identified in http://www.meetup.com/DDD-CQRS-ES/events/232482868/ .
 
 
-![Alt text](HotelMgmtSystem.jpg)
+![Alt text](HotelMgmtSystem.jpg "From the initial eventstorming exercise.")
 
 ## TODO
 
