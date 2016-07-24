@@ -1,8 +1,7 @@
-# Eventsourcing & CQRS demo: Hotel reservations.
+# Eventsourcing & CQRS demo: Hotel Booking System
 
-Sample implementation of an aggregate and read model from the "Online Booking System" bounded context we identified in http://www.meetup.com/DDD-CQRS-ES/events/232482868/ .
+Sample implementation of an aggregate and read models from the "Online Booking System" bounded context we identified in http://www.meetup.com/DDD-CQRS-ES/events/232482868/ .
 
-## Eventstorming Exercise:
 
 ![Alt text](HotelMgmtSystem.jpg)
 
