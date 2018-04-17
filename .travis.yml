@@ -1,4 +1,0 @@
-language: csharp
-solution: Ada.Hotel.Demo.sln
-before_script: cd src
-
